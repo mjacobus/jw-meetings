@@ -4,4 +4,6 @@
 *.sh
 /_old
 /tmp
-/data
+/public/data
+/node_modules g
+/node_modules

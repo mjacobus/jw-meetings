@@ -1,0 +1,27 @@
+<h2><%= meeting %></h2>
+<a href="/">Back</a>
+
+
+<% files.each do |file| %>
+  <div>
+    <h3> <%= file[:name] %></h3>
+
+    <% if file[:extension] == 'mp4' %>
+      <video controls width="250">
+        <source src="<%= file[:url] %>"
+                type="video/mp4">
+                Sorry, your browser doesn't support embedded videos.
+      </video>
+    <% end %>
+
+    <% if ['jpg', 'jpeg'].include?(file[:extension]) %>
+      <div class="image-container">
+        <img class="list-item" src=" <%= file[:url] %>" alt="<%= file[:name] %>">
+      </div>
+    <% end %>
+
+    <% if !file[:supported] %>
+      <p>Unsupported file</p>
+    <% end %>
+  </div>
+<% end %>
