@@ -1,8 +1,8 @@
 <h2>Meeting: <%= meeting %></h2>
+<hr>
 
 <% files.each do |file| %>
   <div>
-    <h3> <%= file[:name] %></h3>
 
     <% if file[:extension] == 'mp4' %>
       <video controls width="250">
@@ -21,5 +21,7 @@
     <% if !file[:supported] %>
       <p>Unsupported file</p>
     <% end %>
+    <p> <%= file[:name] %></p>
   </div>
+  <hr>
 <% end %>

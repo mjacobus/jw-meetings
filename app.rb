@@ -25,5 +25,9 @@ get '/meetings/:meeting' do
     }
   end
 
+  files = files.sort_by do |file|
+    file[:name]
+  end
+
   erb :meeting,  locals: { meeting: meeting, files: files }, layout: :app
 end
