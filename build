@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+ACCEPTED_EXTENSIONS = ['mp4', 'jpg', 'jpeg']
+
+source_path = ARGV.first
+
+puts "Listing files in #{source_path}"
+
+files = []
+Dir["#{source_path}/**"].each do |file|
+  extension = file.split('.').last.downcase
+  unless ACCEPTED_EXTENSIONS.include?(extension)
+    puts "File not supported #{file}"
+    next
+  end
+
+  path = File.expand_path(file)
+
+  puts "Adding #{path}"
+  files.push(
+    filename: file,
+    path: "file://#{path}",
+    extension: File.basename(file),
+    title: File.basename(file),
+  )
+end
+
+json = JSON.dump(files)
+
+File.open('data/files.json', 'w') do |file|
+  file.puts(json)
+end
